@@ -66,6 +66,10 @@ O teste Java inicia um servidor local real e verifica os bytes transferidos, nom
 
 Durante uma espera de download que exibe a contagem regressiva, se a pessoa deixar o app em segundo plano, uma notificação avisa quando faltarem 30 segundos. Um serviço em primeiro plano mantém essa contagem ativa no HyperOS e em outros aparelhos que limitam tarefas em segundo plano. Se o CAPTCHA aparecer enquanto o app estiver em segundo plano, a notificação também a chama de volta para concluir a verificação. Permita notificações quando o Android pedir. Se já tiverem sido bloqueadas, ative-as em Configurações do celular → Aplicativos → Estante Livre → Notificações. No Xiaomi, se a contagem ainda parar em segundo plano, defina a bateria do Estante Livre como **Sem restrições**.
 
+## Extensões do APK por JSON (Android 1.12)
+
+O app começa sem extensões ativas. Em **Descobrir livros → Minhas extensões**, cole o JSON copiado da página independente [Extensões JSON](./extensoes-json.html). O catálogo contém 20 extensões nativas selecionadas; cada JSON ativa o adaptador correspondente do APK, preservando busca e resolução de arquivos. Só esses adaptadores catalogados podem ser importados. As extensões ficam salvas localmente e podem ser removidas nessa tela. O formato não executa código e requer esta versão do APK.
+
 ## Estrutura
 
 ```

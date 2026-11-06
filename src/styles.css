@@ -743,3 +743,9 @@ input[type=range] { width: 100%; accent-color: var(--acc); }
 .wifi-qr { background: white; border-radius: 16px; padding: 12px; max-width: 290px; margin: 20px auto; }
 .wifi-qr svg { display: block; width: 100%; height: auto; }
 .wifi-success { color: #38e07b; }
+.custom-sources { display: grid; gap: 12px; }
+.custom-sources textarea { width: 100%; resize: vertical; font: 13px/1.5 ui-monospace, Consolas, monospace; }
+.custom-sources .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.custom-sources h3 { margin: 12px 0 0; }
+.custom-source-list { display: grid; gap: 8px; }
+.custom-source-list .site-card { display: flex; align-items: center; justify-content: space-between; gap: 12px; }

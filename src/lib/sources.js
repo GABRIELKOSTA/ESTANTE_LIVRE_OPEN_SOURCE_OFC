@@ -223,7 +223,7 @@ async function buildWikisourceEpub(lang, page, onProgress) {
 }
 
 // =====================================================================
-export const SOURCES = [
+const BUILTIN_SOURCES = [
   createHQNowSource(),
   {
     id: 'elivros', name: 'eLivros', site: 'eLivros', lang: 'PT', color: '#ea580c',
@@ -360,6 +360,109 @@ export const SOURCES = [
   },
 ];
 
+const CUSTOM_KEY = 'estante:custom-sources';
+const customIds = new Set();
+function loadCustomDefinitions() {
+  try {
+    const definitions = JSON.parse(localStorage.getItem(CUSTOM_KEY) || '[]');
+    return Array.isArray(definitions) ? definitions.map(createCustomSource).filter(Boolean) : [];
+  } catch { return []; }
+}
+let customDefinitions = (() => {
+  try { return JSON.parse(localStorage.getItem(CUSTOM_KEY) || '[]').filter(x => x && typeof x === 'object'); }
+  catch { return []; }
+})();
+// As implementações nativas ficam disponíveis para importação por JSON,
+// mas só entram na lista de busca depois que a pessoa as adiciona.
+export let SOURCES = loadCustomDefinitions();
+SOURCES.forEach(s => { if (s.custom) customIds.add(s.id); });
+
+const safeText = value => String(value ?? '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+const getPath = (object, path) => String(path || '').split('.').filter(Boolean).reduce((value, key) => value == null ? undefined : value[key], object);
+const palette = ['#0e7490', '#9333ea', '#ea580c', '#16a34a', '#2563eb', '#b4235a'];
+const safeTemplate = (value, query, page) => value.replace(/\{query\}/g, enc(query)).replace(/\{page\}/g, String(page));
+
+export function createCustomSource(definition) {
+  const d = definition;
+  if (!d || typeof d !== 'object' || Array.isArray(d) || typeof d.name !== 'string' || d.name.trim().length > 80 ||
+      !['livro', 'hq'].includes(d.kind || 'livro') || !['pt', 'en', 'es', 'fr', 'it', 'de', 'multi'].includes(d.lang || 'pt')) return null;
+  if (typeof d.adapter !== 'string') return null;
+  const adapter = typeof d.adapter === 'string' ? BUILTIN_SOURCES.find(source => source.id === d.adapter) : null;
+  if (!adapter) return null;
+  const siteUrl = adapter ? '' : abs(d.site || d.url || '');
+  if (!adapter && (!siteUrl || !siteUrl.startsWith('https:'))) return null;
+  const search = d.search && typeof d.search === 'object' ? d.search : {};
+  const type = search.type === 'json' ? 'json' : 'html';
+  const template = adapter ? '' : (type === 'json' ? search.url : (search.url || new URL('/?s={query}', siteUrl).href));
+  if (!adapter && (typeof template !== 'string' || !template.startsWith('https:') || template.length > 1000)) return null;
+  const requestedId = String(d.id || '').toLowerCase();
+  const id = /^custom-[a-z0-9-]{1,45}$/.test(requestedId) ? requestedId : 'custom-' + String(d.id || d.name).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 45);
+  const langCode = d.lang || 'pt';
+  if (adapter) return {
+    ...adapter, id, custom: true, name: d.name.trim(),
+    site: d.site || adapter.site,
+    kind: d.kind || adapter.kind,
+    lang: d.lang === 'multi' || adapter.lang === 'Multi' ? 'Multi' : ({ pt: 'PT', en: 'EN' }[langCode] || adapter.lang),
+    langCodes: langCode === 'multi' || adapter.lang === 'Multi' ? ['pt', 'en'] : [langCode],
+    color: /^#[0-9a-f]{6}$/i.test(d.color || '') ? d.color : adapter.color,
+  };
+  const base = {
+    id, custom: true, name: d.name.trim(), site: new URL(siteUrl).hostname, lang: langCode === 'multi' ? 'Multi' : ({ pt: 'PT', en: 'EN' }[langCode] || 'Multi'),
+    kind: d.kind || 'livro', color: /^#[0-9a-f]{6}$/i.test(d.color || '') ? d.color : palette[customIds.size % palette.length], langCodes: langCode === 'multi' ? ['pt', 'en'] : [langCode],
+    async search(q, page = 1) {
+      const url = safeTemplate(template, q, page);
+      if (!url.startsWith('https:')) throw new Error('A busca da extensão precisa usar HTTPS.');
+      if (type === 'html') {
+        const selector = search.selector || 'article h2 a[href], article h3 a[href], h2.entry-title a[href], h3.entry-title a[href], .book-card a[href]';
+        return htmlSearch({ url: () => url, selector, sameHost: search.sameHost !== false })(q, page);
+      }
+      const response = await json(url);
+      let records = getPath(response, search.items || 'items') || getPath(response, 'results') || getPath(response, 'docs') || [];
+      if (!Array.isArray(records)) throw new Error('O JSON da extensão não contém uma lista. Confira “items” ou “results”.');
+      const fields = search.fields || {};
+      const items = records.slice(0, 80).flatMap((record, i) => {
+        const title = safeText(getPath(record, fields.title || 'title') || getPath(record, 'name'));
+        const rawUrl = getPath(record, fields.url || 'url') || getPath(record, 'link');
+        const itemUrl = abs(typeof rawUrl === 'object' ? rawUrl.href || rawUrl.url : rawUrl, url);
+        if (!title || !itemUrl || !itemUrl.startsWith('https:')) return [];
+        const rawCover = getPath(record, fields.cover || 'cover') || getPath(record, 'thumbnail');
+        const cover = abs(typeof rawCover === 'object' ? rawCover.url : rawCover, itemUrl) || null;
+        const fileUrl = abs(getPath(record, fields.file || 'file') || '', itemUrl);
+        const format = String(getPath(record, fields.format || 'format') || fileFormat(fileUrl) || '').toLowerCase().replace(/^application\//, '');
+        const files = fileUrl && ['epub', 'pdf', 'cbr', 'cbz'].includes(format) ? [{ format, url: fileUrl, label: format.toUpperCase() }] : undefined;
+        return [{ key: id + ':' + (record.id || itemUrl || i), title, author: safeText(getPath(record, fields.author || 'author') || ''), cover, url: itemUrl, ...(files ? { files } : {}) }];
+      });
+      const next = getPath(response, search.next) || (records.length >= 20 ? page + 1 : null);
+      return { items, next: next ? (typeof next === 'number' ? next : page + 1) : null };
+    },
+    resolve: item => genericResolve(item),
+  };
+  return base;
+}
+
+export function addCustomSource(definition) {
+  const source = createCustomSource(definition);
+  if (!source) throw new Error('A extensão não é válida. Confira nome, tipo, idioma e endereços HTTPS.');
+  if (BUILTIN_SOURCES.some(s => s.id === source.id)) throw new Error('Esse identificador já pertence a uma extensão do app.');
+  if (customDefinitions.some(d => createCustomSource(d)?.id === source.id)) throw new Error('Já existe uma extensão com esse nome.');
+  customDefinitions = [...customDefinitions, { ...definition, id: source.id }];
+  try { localStorage.setItem(CUSTOM_KEY, JSON.stringify(customDefinitions)); }
+  catch { customDefinitions.pop(); throw new Error('Não foi possível salvar a extensão neste aparelho.'); }
+  customIds.add(source.id); SOURCES = loadCustomDefinitions();
+  return source;
+}
+
+export function removeCustomSource(id) {
+  if (!customIds.has(id)) return false;
+  const next = customDefinitions.filter(d => createCustomSource(d)?.id !== id);
+  try { localStorage.setItem(CUSTOM_KEY, JSON.stringify(next)); }
+  catch { throw new Error('Não foi possível atualizar a lista neste aparelho.'); }
+  customDefinitions = next; customIds.delete(id); SOURCES = loadCustomDefinitions();
+  return true;
+}
+
+export function isCustomSource(id) { return customIds.has(id); }
+
 SOURCES.forEach((s) => {
   s.kind = s.kind || 'livro';
   if (!s.preview && s.resolve && !['archive', 'archive-hq', 'openlibrary'].includes(s.id)) {
@@ -375,6 +478,6 @@ SOURCES.forEach((s) => {
     s.search = async (...a) => { const r = await search(...a); r.items.forEach((i) => { i.lang = i.lang || fixed; }); return r; };
   }
 });
-export const sourceLangs = (s) => (s.lang === 'Multi' ? ['pt', 'en'] : [{ PT: 'pt', EN: 'en' }[s.lang]]);
+export const sourceLangs = (s) => s.custom ? s.langCodes : (s.lang === 'Multi' ? ['pt', 'en'] : [{ PT: 'pt', EN: 'en' }[s.lang]]);
 export const sourceById = (id) => SOURCES.find((s) => s.id === id);
 export const resolveItem = async (src, item) => (item.files ? { files: item.files } : src.resolve(item));

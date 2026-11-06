@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import sitesData from '../data/sites.json';
-import { SOURCES, sourceById, resolveItem, sourceLangs } from '../lib/sources.js';
+import { SOURCES, sourceById, resolveItem, sourceLangs, addCustomSource, removeCustomSource } from '../lib/sources.js';
+import { getText } from '../lib/net.js';
 import { langShort } from '../lib/lang.js';
 import { coverCache, previewCover } from '../lib/images.js';
 import { searchSources, withDeadline } from '../lib/source-search.js';
@@ -66,6 +67,7 @@ export default function Discover({ onBack, jobs, download, onOpenBook }) {
     setSrc(id);
   };
   const [detail, setDetail] = useState(null);
+  const [sourceRevision, setSourceRevision] = useState(0);
 
   return (
     <div className="page">
@@ -76,19 +78,65 @@ export default function Discover({ onBack, jobs, download, onOpenBook }) {
       </div>
       <div className="tabs">
         <button className={tab === 'ext' ? 'on' : ''} onClick={() => setTab('ext')}>Extensões ({SOURCES.filter((x) => x.kind === kind).length})</button>
-        <button className={tab === 'sites' ? 'on' : ''} onClick={() => setTab('sites')}>Fontes</button>
         <button className={tab === 'link' ? 'on' : ''} onClick={() => setTab('link')}>Por link</button>
+        <button className={tab === 'manage' ? 'on' : ''} onClick={() => setTab('manage')}>Minhas extensões</button>
       </div>
-      {tab === 'ext' && <Extensions kind={kind} lang={lang} setLang={(l) => { setLang(l); if (src !== 'all' && l !== 'all' && !sourceLangs(sourceById(src)).includes(l)) setSrc('all'); }} src={src} setSrc={pickSrc} onPick={(item, source) => setDetail({ item, source })} />}
-      {tab === 'sites' && <Sites key={kind} kind={kind} onUseExt={(id) => { pickSrc(id); setTab('ext'); }} />}
+      {tab === 'ext' && <Extensions kind={kind} lang={lang} setLang={(l) => { setLang(l); if (src !== 'all' && l !== 'all' && !sourceLangs(sourceById(src)).includes(l)) setSrc('all'); }} src={src} setSrc={pickSrc} onPick={(item, source) => setDetail({ item, source })} onManage={() => setTab('manage')} />}
       {tab === 'link' && <ByLink jobs={jobs} download={download} />}
+      {tab === 'manage' && <ManageSources key={sourceRevision} onChanged={() => setSourceRevision(n => n + 1)} />}
       {detail && <DetailSheet {...detail} jobs={jobs} download={download} onClose={() => setDetail(null)} onOpenBook={onOpenBook} />}
     </div>
   );
 }
 
+function ManageSources({ onChanged }) {
+  const [text, setText] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
+  const custom = SOURCES.filter(source => source.custom);
+
+  const add = async () => {
+    setError(''); setMessage('');
+    try {
+      let value = text.trim();
+      if (!value) throw new Error('Cole o JSON de uma extensão verificada.');
+      if (/^https:\/\//i.test(value)) {
+        const address = new URL(value);
+        if (!/\.json(?:$|[?#])/i.test(address.pathname)) throw new Error('Use o link do arquivo JSON da extensão.');
+        setBusy(true);
+        value = await getText(address.href);
+      }
+      const definition = JSON.parse(value);
+      if (!definition || typeof definition !== 'object' || Array.isArray(definition)) throw new Error('O JSON precisa conter a definição de uma extensão.');
+      const source = addCustomSource(definition);
+      onChanged(); setText(''); setMessage(`Extensão “${source.name}” adicionada a este aparelho.`);
+    } catch (cause) { setError(cause?.message || 'Não foi possível adicionar a extensão.'); }
+    finally { setBusy(false); }
+  };
+
+  const remove = id => {
+    try { removeCustomSource(id); onChanged(); setMessage('Extensão removida deste aparelho.'); setError(''); }
+    catch (cause) { setError(cause.message); }
+  };
+
+  return <div className="custom-sources">
+    <p className="muted">O app começa sem extensões ativas. Importe um JSON do catálogo para ativar uma extensão nativa verificada; a seleção fica salva só neste aparelho.</p>
+    <label className="field"><span>JSON ou link de um arquivo JSON</span><textarea rows="7" value={text} onChange={e => setText(e.target.value)} placeholder={'Cole aqui o JSON copiado do catálogo de extensões.'} /></label>
+    <div className="row"><button className="xbtn primary" onClick={add} disabled={busy}>{busy ? 'Lendo JSON…' : 'Adicionar extensão'}</button></div>
+    {message && <p className="ok-box" role="status">{message}</p>}
+    {error && <p className="error-box" role="alert">{error}</p>}
+    <h3>Extensões personalizadas ({custom.length})</h3>
+    {!custom.length && <p className="muted">Nenhuma adicionada ainda.</p>}
+    <div className="custom-source-list">{custom.map(source => <article className="site-card" key={source.id}>
+      <div><strong>{source.name}</strong><p className="muted small">{source.site} · {source.kind === 'hq' ? 'HQ' : 'Livro'} · {source.lang}</p></div>
+      <button className="xbtn sm danger" onClick={() => remove(source.id)}>Remover</button>
+    </article>)}</div>
+  </div>;
+}
+
 // ---------------------------------------------------------------- Extensões
-function Extensions({ kind, lang, setLang, src, setSrc, onPick }) {
+function Extensions({ kind, lang, setLang, src, setSrc, onPick, onManage }) {
   const [q, setQ] = useState('');
   const [query, setQuery] = useState('');
   const [state, setState] = useState({});
@@ -137,7 +185,7 @@ function Extensions({ kind, lang, setLang, src, setSrc, onPick }) {
       </div>
 
       {!ofKind.length ? (
-        <div className="ok-box">Nenhuma extensão disponível para este idioma.</div>
+        <div className="ok-box">Nenhuma extensão adicionada ainda. Importe uma fonte verificada em <button className="link-button" onClick={onManage}>Minhas extensões</button>.</div>
       ) : !current ? (
         list.map((s) => {
           // antes da primeira resposta a fonte ainda não tem lista: começa como "carregando"
