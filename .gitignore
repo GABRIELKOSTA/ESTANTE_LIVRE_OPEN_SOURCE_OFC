@@ -3,6 +3,5 @@ dist
 android/app/build
 android/.gradle
 android/build
-*.apk
 .gradle-user-home
 .android-user-home

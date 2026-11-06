@@ -54,7 +54,7 @@ Execute `npm test` para verificar extensões, formatos, redirecionamentos HTTP e
 
 A extensão HQ Now consulta `https://admin.hq-now.com/graphql` por POST JSON. O contrato foi conferido na [implementação mantida pelo projeto Keiyoushi](https://github.com/keiyoushi/extensions-source/tree/main/src/pt/hqnow). Os testes usam respostas simuladas para busca, capítulos, falhas e criação do CBZ, além de verificar que o arquivo abre no leitor sem rede. A API do HQ Now não respondeu neste ambiente durante a implementação; a operação contra o serviço real ainda precisa ser validada no aparelho. O proxy de desenvolvimento encaminha POST para permitir testar essa consulta no navegador.
 
-## Compartilhar livros por Wi-Fi e alertas de CAPTCHA (Android 1.8)
+## Compartilhar livros por Wi-Fi e alertas de CAPTCHA (Android 1.9)
 
 Abra os detalhes de um livro já salvo na estante e toque em **Compartilhar por Wi-Fi**. O app prepara uma cópia temporária e mostra um QR code gerado no próprio aparelho. Os dois celulares devem estar na mesma rede Wi-Fi; a transferência não consulta o hospedador original e não depende da espera dele.
 
@@ -64,7 +64,7 @@ Mantenha a tela de compartilhamento aberta até o recebimento terminar. O servid
 
 O teste Java inicia um servidor local real e verifica os bytes transferidos, nomes, links, token da sessão, HEAD, rotas inválidas e encerramento. Os testes JavaScript cobrem preparação em partes, cancelamento, falhas, recebimento e importação. A leitura dos QR codes foi conferida com ZXing. O teste completo entre dois celulares ainda depende de validação nos aparelhos.
 
-Durante uma espera de download que exibe a contagem regressiva, se a pessoa deixar o app em segundo plano, uma notificação avisa quando faltarem 30 segundos. Se o CAPTCHA aparecer enquanto o app estiver em segundo plano, a notificação também a chama de volta para concluir a verificação. O Android pede autorização para enviar esses avisos; se ela for negada, o download continua sem notificação.
+Durante uma espera de download que exibe a contagem regressiva, se a pessoa deixar o app em segundo plano, uma notificação avisa quando faltarem 30 segundos. Um serviço em primeiro plano mantém essa contagem ativa no HyperOS e em outros aparelhos que limitam tarefas em segundo plano. Se o CAPTCHA aparecer enquanto o app estiver em segundo plano, a notificação também a chama de volta para concluir a verificação. Permita notificações quando o Android pedir. Se já tiverem sido bloqueadas, ative-as em Configurações do celular → Aplicativos → Estante Livre → Notificações. No Xiaomi, se a contagem ainda parar em segundo plano, defina a bateria do Estante Livre como **Sem restrições**.
 
 ## Estrutura
 

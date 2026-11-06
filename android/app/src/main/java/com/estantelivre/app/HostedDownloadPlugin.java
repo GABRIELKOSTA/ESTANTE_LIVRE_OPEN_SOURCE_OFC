@@ -30,6 +30,9 @@ import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
+import com.getcapacitor.annotation.Permission;
+import com.getcapacitor.annotation.PermissionCallback;
+import com.getcapacitor.PermissionState;
 import androidx.core.app.NotificationCompat;
 import java.io.InputStream;
 import java.io.ByteArrayOutputStream;
@@ -40,7 +43,9 @@ import org.json.JSONTokener;
 
 /** A separate WebView runs the host's ordinary free-download flow. No bridge is
  * exposed to remote pages; only the resulting download URL is returned. */
-@CapacitorPlugin(name = "HostedDownload")
+@CapacitorPlugin(name = "HostedDownload", permissions = {
+    @Permission(alias = "notifications", strings = { android.Manifest.permission.POST_NOTIFICATIONS })
+})
 public class HostedDownloadPlugin extends Plugin {
     private static final String NOTIFICATION_CHANNEL = "hosted-download";
     private static volatile boolean appBackground = false;
@@ -56,7 +61,6 @@ public class HostedDownloadPlugin extends Plugin {
     private TextView verificationHint;
     private long verificationStarted;
     private String pendingVerification;
-    private boolean permissionPrompted;
     private int lastRemainingSeconds = -1;
     private long remainingObservedAt;
     private boolean countdownNotificationSent;
@@ -96,21 +100,37 @@ public class HostedDownloadPlugin extends Plugin {
         return Math.max(0, lastRemainingSeconds - (int)((SystemClock.elapsedRealtime() - remainingObservedAt) / 1000));
     }
 
-    private void askNotificationPermission() {
-        if (Build.VERSION.SDK_INT < 33 || permissionPrompted || getActivity().checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) return;
-        permissionPrompted = true;
-        getActivity().requestPermissions(new String[]{android.Manifest.permission.POST_NOTIFICATIONS}, 9472);
+    @PluginMethod public void requestNotifications(PluginCall call) {
+        if (Build.VERSION.SDK_INT < 33 || getPermissionState("notifications") == PermissionState.GRANTED) {
+            NotificationManager manager = (NotificationManager)getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+            JSObject result = new JSObject(); result.put("granted", true);
+            result.put("notificationsEnabled", manager != null && manager.areNotificationsEnabled());
+            call.resolve(result); return;
+        }
+        if (getActivity().shouldShowRequestPermissionRationale(android.Manifest.permission.POST_NOTIFICATIONS)) {
+            JSObject result = new JSObject(); result.put("granted", false); result.put("settingsRequired", true); call.resolve(result); return;
+        }
+        requestPermissionForAlias("notifications", call, "notificationPermissionResult");
+    }
+
+    @PermissionCallback private void notificationPermissionResult(PluginCall call) {
+        JSObject result = new JSObject();
+        boolean granted = getPermissionState("notifications") == PermissionState.GRANTED;
+        NotificationManager manager = (NotificationManager)getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        boolean enabled = manager != null && manager.areNotificationsEnabled();
+        result.put("granted", granted); result.put("notificationsEnabled", enabled);
+        result.put("settingsRequired", !granted || !enabled); call.resolve(result);
     }
 
     private void postReturnNotification(String text, boolean urgent) {
         if (Build.VERSION.SDK_INT >= 33 && getActivity().checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) return;
         NotificationManager manager = (NotificationManager)getContext().getSystemService(Context.NOTIFICATION_SERVICE);
-        if (manager == null) return;
+        if (manager == null || !manager.areNotificationsEnabled()) return;
         if (Build.VERSION.SDK_INT >= 26) manager.createNotificationChannel(new NotificationChannel(NOTIFICATION_CHANNEL, "Downloads gratuitos", NotificationManager.IMPORTANCE_HIGH));
         Intent intent = new Intent(getActivity(), MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent back = PendingIntent.getActivity(getContext(), 9472, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         Notification notification = new NotificationCompat.Builder(getContext(), NOTIFICATION_CHANNEL)
-            .setSmallIcon(getActivity().getApplicationInfo().icon)
+            .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle("Volte ao Estante Livre")
             .setContentText(text)
             .setStyle(new NotificationCompat.BigTextStyle().bigText(text))
@@ -142,7 +162,6 @@ public class HostedDownloadPlugin extends Plugin {
     private void start(PluginCall call, String url) {
         if (active != null) { call.reject("Aguarde o download do outro livro terminar de ser preparado."); return; }
         current = this;
-        askNotificationPermission();
         active = call;
         requestId = call.getString("requestId", "");
         started = SystemClock.elapsedRealtime();
@@ -151,6 +170,8 @@ public class HostedDownloadPlugin extends Plugin {
         remainingObservedAt = 0;
         countdownNotificationSent = false;
         handler.removeCallbacks(countdownAlert);
+        try { DownloadKeepAliveService.start(getContext()); }
+        catch (Exception error) { android.util.Log.e("EstanteLivre", "Could not start download service", error); }
         try {
             try (InputStream input = getContext().getAssets().open("public/hosted-download-probe.js")) {
                 ByteArrayOutputStream output = new ByteArrayOutputStream();
@@ -380,6 +401,7 @@ public class HostedDownloadPlugin extends Plugin {
         NotificationManager notifications = (NotificationManager)getContext().getSystemService(Context.NOTIFICATION_SERVICE);
         if (notifications != null) notifications.cancel(9472);
         if (current == this) current = null;
+        DownloadKeepAliveService.stop(getContext());
         if (view != null) {
             view.stopLoading();
             if (view.getParent() instanceof ViewGroup) ((ViewGroup) view.getParent()).removeView(view);
