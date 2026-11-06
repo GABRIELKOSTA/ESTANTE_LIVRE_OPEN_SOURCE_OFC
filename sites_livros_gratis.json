@@ -1,0 +1,808 @@
+{
+  "titulo": "Mapa de sites para livros gratuitos em EPUB e PDF",
+  "observacao": "Links para plataformas, não para obras individuais. Download e licenças dependem de cada título. Dados compilados do levantamento na conversa; disponibilidade não retestada individualmente.",
+  "total": 89,
+  "sites": [
+    {
+      "nome": "eLivros",
+      "url": "https://elivros.info/",
+      "categoria": "Literatura geral e contemporânea",
+      "formatos": "Variável",
+      "cadastro": "Não confirmado",
+      "download_direto": "Anunciado",
+      "situacao_direitos": "Não verificado"
+    },
+    {
+      "nome": "dLivros",
+      "url": "https://dlivros.com/",
+      "categoria": "Literatura geral e contemporânea",
+      "formatos": "EPUB, PDF",
+      "cadastro": "Não",
+      "download_direto": "Sim",
+      "situacao_direitos": "Não verificado"
+    },
+    {
+      "nome": "Baixe Livros",
+      "url": "https://www.baixelivros.com.br/",
+      "categoria": "Literatura geral e contemporânea",
+      "formatos": "Variável",
+      "cadastro": "Não",
+      "download_direto": "Conforme obra",
+      "situacao_direitos": "Política de licenças declarada"
+    },
+    {
+      "nome": "Smashwords",
+      "url": "https://www.smashwords.com/",
+      "categoria": "Literatura geral e contemporânea",
+      "formatos": "EPUB, outros",
+      "cadastro": "Variável",
+      "download_direto": "Títulos gratuitos",
+      "situacao_direitos": "Autores e editoras"
+    },
+    {
+      "nome": "Kobo",
+      "url": "https://www.kobo.com/br/pt",
+      "categoria": "Literatura geral e contemporânea",
+      "formatos": "EPUB, outros",
+      "cadastro": "Sim",
+      "download_direto": "Variável",
+      "situacao_direitos": "Loja licenciada"
+    },
+    {
+      "nome": "Amazon Kindle",
+      "url": "https://www.amazon.com.br/",
+      "categoria": "Literatura geral e contemporânea",
+      "formatos": "Kindle",
+      "cadastro": "Sim",
+      "download_direto": "Não geralmente em EPUB/PDF",
+      "situacao_direitos": "Loja licenciada"
+    },
+    {
+      "nome": "Free-eBooks.net",
+      "url": "https://www.free-ebooks.net/",
+      "categoria": "Literatura geral e contemporânea",
+      "formatos": "PDF, EPUB",
+      "cadastro": "Sim",
+      "download_direto": "Com limites",
+      "situacao_direitos": "Licenças não auditadas"
+    },
+    {
+      "nome": "BookRix",
+      "url": "https://www.bookrix.com/",
+      "categoria": "Literatura geral e contemporânea",
+      "formatos": "Variável",
+      "cadastro": "Variável",
+      "download_direto": "Parcial",
+      "situacao_direitos": "Plataforma de autores"
+    },
+    {
+      "nome": "Booksie",
+      "url": "https://www.booksie.com/",
+      "categoria": "Literatura geral e contemporânea",
+      "formatos": "Leitura web",
+      "cadastro": "Não para ler",
+      "download_direto": "Geralmente não",
+      "situacao_direitos": "Plataforma de autores"
+    },
+    {
+      "nome": "Wattpad",
+      "url": "https://www.wattpad.com/",
+      "categoria": "Literatura geral e contemporânea",
+      "formatos": "Leitura web",
+      "cadastro": "Sim",
+      "download_direto": "Geralmente não",
+      "situacao_direitos": "Plataforma de autores"
+    },
+    {
+      "nome": "Royal Road",
+      "url": "https://www.royalroad.com/",
+      "categoria": "Literatura geral e contemporânea",
+      "formatos": "Leitura web",
+      "cadastro": "Não para ler",
+      "download_direto": "Geralmente não",
+      "situacao_direitos": "Plataforma de autores"
+    },
+    {
+      "nome": "Inkitt",
+      "url": "https://www.inkitt.com/",
+      "categoria": "Literatura geral e contemporânea",
+      "formatos": "Leitura web",
+      "cadastro": "Variável",
+      "download_direto": "Geralmente não",
+      "situacao_direitos": "Plataforma de autores"
+    },
+    {
+      "nome": "Project Gutenberg",
+      "url": "https://www.gutenberg.org/",
+      "categoria": "Bibliotecas internacionais",
+      "formatos": "EPUB, HTML, Kindle",
+      "cadastro": "Não",
+      "download_direto": "Sim",
+      "situacao_direitos": "Domínio público / autorização conforme jurisdição"
+    },
+    {
+      "nome": "Standard Ebooks",
+      "url": "https://standardebooks.org/",
+      "categoria": "Bibliotecas internacionais",
+      "formatos": "EPUB, outros",
+      "cadastro": "Não",
+      "download_direto": "Sim",
+      "situacao_direitos": "Domínio público"
+    },
+    {
+      "nome": "ManyBooks",
+      "url": "https://manybooks.net/",
+      "categoria": "Bibliotecas internacionais",
+      "formatos": "EPUB, PDF, outros",
+      "cadastro": "Variável",
+      "download_direto": "Conforme título",
+      "situacao_direitos": "Acervo misto"
+    },
+    {
+      "nome": "Open Library",
+      "url": "https://openlibrary.org/",
+      "categoria": "Bibliotecas internacionais",
+      "formatos": "EPUB, PDF, empréstimo",
+      "cadastro": "Para empréstimo",
+      "download_direto": "Parcial",
+      "situacao_direitos": "Empréstimo e acesso autorizado conforme obra"
+    },
+    {
+      "nome": "Internet Archive",
+      "url": "https://archive.org/details/texts",
+      "categoria": "Bibliotecas internacionais",
+      "formatos": "PDF, EPUB, outros",
+      "cadastro": "Para empréstimo",
+      "download_direto": "Parcial",
+      "situacao_direitos": "Direitos variáveis"
+    },
+    {
+      "nome": "Global Grey",
+      "url": "https://www.globalgreyebooks.com/",
+      "categoria": "Bibliotecas internacionais",
+      "formatos": "EPUB, PDF",
+      "cadastro": "Não",
+      "download_direto": "Sim",
+      "situacao_direitos": "Domínio público declarado"
+    },
+    {
+      "nome": "Planet eBook",
+      "url": "https://www.planetebook.com/",
+      "categoria": "Bibliotecas internacionais",
+      "formatos": "EPUB, PDF",
+      "cadastro": "Não",
+      "download_direto": "Sim",
+      "situacao_direitos": "Domínio público"
+    },
+    {
+      "nome": "Epub Books",
+      "url": "https://www.epubbooks.com/",
+      "categoria": "Bibliotecas internacionais",
+      "formatos": "EPUB",
+      "cadastro": "Não",
+      "download_direto": "Sim",
+      "situacao_direitos": "Domínio público"
+    },
+    {
+      "nome": "Feedbooks",
+      "url": "https://www.feedbooks.com/",
+      "categoria": "Bibliotecas internacionais",
+      "formatos": "Variável",
+      "cadastro": "Variável",
+      "download_direto": "Parcial",
+      "situacao_direitos": "Acervo misto"
+    },
+    {
+      "nome": "Freeditorial",
+      "url": "https://www.freeditorial.com/",
+      "categoria": "Bibliotecas internacionais",
+      "formatos": "EPUB, PDF",
+      "cadastro": "Variável",
+      "download_direto": "Conforme título",
+      "situacao_direitos": "Licença por obra"
+    },
+    {
+      "nome": "Authorama",
+      "url": "https://www.authorama.com/",
+      "categoria": "Bibliotecas internacionais",
+      "formatos": "Leitura web",
+      "cadastro": "Não",
+      "download_direto": "Principalmente leitura",
+      "situacao_direitos": "Domínio público"
+    },
+    {
+      "nome": "Online Books Page",
+      "url": "https://onlinebooks.library.upenn.edu/",
+      "categoria": "Bibliotecas internacionais",
+      "formatos": "Variável",
+      "cadastro": "Não",
+      "download_direto": "Via fonte",
+      "situacao_direitos": "Curadoria universitária"
+    },
+    {
+      "nome": "Wikibooks",
+      "url": "https://www.wikibooks.org/",
+      "categoria": "Bibliotecas internacionais",
+      "formatos": "Web, exportação",
+      "cadastro": "Não",
+      "download_direto": "Variável",
+      "situacao_direitos": "Licenças abertas"
+    },
+    {
+      "nome": "Wikisource",
+      "url": "https://www.wikisource.org/",
+      "categoria": "Bibliotecas internacionais",
+      "formatos": "EPUB, web",
+      "cadastro": "Não",
+      "download_direto": "Variável",
+      "situacao_direitos": "Direitos conforme obra"
+    },
+    {
+      "nome": "Potha",
+      "url": "https://potha.org/pt",
+      "categoria": "Bibliotecas internacionais",
+      "formatos": "Variável",
+      "cadastro": "Não",
+      "download_direto": "Conforme obra",
+      "situacao_direitos": "Autorização declarada"
+    },
+    {
+      "nome": "Domínio Público",
+      "url": "https://www.dominiopublico.gov.br/",
+      "categoria": "Bibliotecas brasileiras",
+      "formatos": "PDF, outros",
+      "cadastro": "Não",
+      "download_direto": "Sim",
+      "situacao_direitos": "Institucional"
+    },
+    {
+      "nome": "Brasiliana USP",
+      "url": "https://digital.bbm.usp.br/",
+      "categoria": "Bibliotecas brasileiras",
+      "formatos": "PDF",
+      "cadastro": "Não",
+      "download_direto": "Selecionados",
+      "situacao_direitos": "Institucional"
+    },
+    {
+      "nome": "Biblioteca Nacional Digital",
+      "url": "https://bndigital.bn.gov.br/",
+      "categoria": "Bibliotecas brasileiras",
+      "formatos": "PDF, imagens",
+      "cadastro": "Não",
+      "download_direto": "Variável",
+      "situacao_direitos": "Institucional"
+    },
+    {
+      "nome": "Wikisource Português",
+      "url": "https://pt.wikisource.org/",
+      "categoria": "Bibliotecas brasileiras",
+      "formatos": "EPUB, exportação",
+      "cadastro": "Não",
+      "download_direto": "Variável",
+      "situacao_direitos": "Direitos conforme obra"
+    },
+    {
+      "nome": "Livris",
+      "url": "https://livris.com.br/",
+      "categoria": "Bibliotecas brasileiras",
+      "formatos": "EPUB, PDF",
+      "cadastro": "Não",
+      "download_direto": "Sim",
+      "situacao_direitos": "Domínio público declarado"
+    },
+    {
+      "nome": "Livros Domínio Público",
+      "url": "https://livrosdominiopublico.com.br/",
+      "categoria": "Bibliotecas brasileiras",
+      "formatos": "PDF",
+      "cadastro": "Não",
+      "download_direto": "Sim",
+      "situacao_direitos": "Domínio público declarado"
+    },
+    {
+      "nome": "GLivros (Domínio Público)",
+      "url": "https://glivros.com/dominio-publico",
+      "categoria": "Bibliotecas brasileiras",
+      "formatos": "EPUB, PDF",
+      "cadastro": "Não nos títulos indicados",
+      "download_direto": "Sim",
+      "situacao_direitos": "Domínio público declarado"
+    },
+    {
+      "nome": "InfoLivros",
+      "url": "https://infolivros.org/",
+      "categoria": "Bibliotecas brasileiras",
+      "formatos": "PDF",
+      "cadastro": "Não",
+      "download_direto": "Sim",
+      "situacao_direitos": "Licenças declaradas"
+    },
+    {
+      "nome": "Biblioteca Digital do Senado",
+      "url": "https://www2.senado.leg.br/bdsf/",
+      "categoria": "Bibliotecas brasileiras",
+      "formatos": "PDF",
+      "cadastro": "Não",
+      "download_direto": "Sim",
+      "situacao_direitos": "Institucional"
+    },
+    {
+      "nome": "Edições Câmara",
+      "url": "https://www2.camara.leg.br/",
+      "categoria": "Bibliotecas brasileiras",
+      "formatos": "PDF",
+      "cadastro": "Não",
+      "download_direto": "Conforme edição",
+      "situacao_direitos": "Institucional"
+    },
+    {
+      "nome": "Biblioteca FUNAG",
+      "url": "https://funag.gov.br/biblioteca-nova/",
+      "categoria": "Bibliotecas brasileiras",
+      "formatos": "PDF, EPUB, outros",
+      "cadastro": "Não",
+      "download_direto": "Sim",
+      "situacao_direitos": "Institucional"
+    },
+    {
+      "nome": "Livros Abertos USP",
+      "url": "https://www.livrosabertos.edusp.usp.br/",
+      "categoria": "Bibliotecas brasileiras",
+      "formatos": "PDF",
+      "cadastro": "Não para leitura",
+      "download_direto": "Sim",
+      "situacao_direitos": "Institucional"
+    },
+    {
+      "nome": "Cultura Acadêmica",
+      "url": "https://www.culturaacademica.com.br/",
+      "categoria": "Bibliotecas brasileiras",
+      "formatos": "PDF",
+      "cadastro": "Variável",
+      "download_direto": "Sim",
+      "situacao_direitos": "Editora acadêmica"
+    },
+    {
+      "nome": "SciELO Livros",
+      "url": "https://books.scielo.org/",
+      "categoria": "Acadêmicos e científicos",
+      "formatos": "PDF, EPUB",
+      "cadastro": "Não para obras abertas",
+      "download_direto": "Títulos abertos",
+      "situacao_direitos": "Acervo misto"
+    },
+    {
+      "nome": "DOAB",
+      "url": "https://www.doabooks.org/",
+      "categoria": "Acadêmicos e científicos",
+      "formatos": "PDF, EPUB, variável",
+      "cadastro": "Não",
+      "download_direto": "Via fonte",
+      "situacao_direitos": "Acesso aberto"
+    },
+    {
+      "nome": "OAPEN",
+      "url": "https://www.oapen.org/",
+      "categoria": "Acadêmicos e científicos",
+      "formatos": "PDF, EPUB",
+      "cadastro": "Não",
+      "download_direto": "Sim",
+      "situacao_direitos": "Acesso aberto"
+    },
+    {
+      "nome": "OpenEdition",
+      "url": "https://www.openedition.org/",
+      "categoria": "Acadêmicos e científicos",
+      "formatos": "PDF, EPUB, web",
+      "cadastro": "Não para leitura aberta",
+      "download_direto": "Variável",
+      "situacao_direitos": "Acesso misto"
+    },
+    {
+      "nome": "JSTOR Open Content",
+      "url": "https://www.jstor.org/open/",
+      "categoria": "Acadêmicos e científicos",
+      "formatos": "PDF",
+      "cadastro": "Não para obras abertas",
+      "download_direto": "Conforme obra",
+      "situacao_direitos": "Acesso aberto selecionado"
+    },
+    {
+      "nome": "Project MUSE",
+      "url": "https://muse.jhu.edu/",
+      "categoria": "Acadêmicos e científicos",
+      "formatos": "PDF",
+      "cadastro": "Variável",
+      "download_direto": "Obras abertas",
+      "situacao_direitos": "Acervo misto"
+    },
+    {
+      "nome": "OpenStax",
+      "url": "https://openstax.org/",
+      "categoria": "Acadêmicos e científicos",
+      "formatos": "PDF, web",
+      "cadastro": "Não",
+      "download_direto": "Sim",
+      "situacao_direitos": "Acesso aberto"
+    },
+    {
+      "nome": "Open Textbook Library",
+      "url": "https://open.umn.edu/opentextbooks",
+      "categoria": "Acadêmicos e científicos",
+      "formatos": "PDF, outros",
+      "cadastro": "Não",
+      "download_direto": "Sim",
+      "situacao_direitos": "Licenças abertas"
+    },
+    {
+      "nome": "NCBI Bookshelf",
+      "url": "https://www.ncbi.nlm.nih.gov/books/",
+      "categoria": "Acadêmicos e científicos",
+      "formatos": "Web, PDF",
+      "cadastro": "Não",
+      "download_direto": "Títulos elegíveis",
+      "situacao_direitos": "Institucional"
+    },
+    {
+      "nome": "IntechOpen",
+      "url": "https://www.intechopen.com/books",
+      "categoria": "Acadêmicos e científicos",
+      "formatos": "PDF",
+      "cadastro": "Não",
+      "download_direto": "Sim",
+      "situacao_direitos": "Acesso aberto"
+    },
+    {
+      "nome": "Springer Nature Link",
+      "url": "https://link.springer.com/",
+      "categoria": "Acadêmicos e científicos",
+      "formatos": "PDF, EPUB",
+      "cadastro": "Variável",
+      "download_direto": "Livros abertos",
+      "situacao_direitos": "Acesso misto"
+    },
+    {
+      "nome": "Frontiers Books",
+      "url": "https://www.frontiersin.org/books",
+      "categoria": "Acadêmicos e científicos",
+      "formatos": "PDF",
+      "cadastro": "Não",
+      "download_direto": "Sim",
+      "situacao_direitos": "Acesso aberto"
+    },
+    {
+      "nome": "MDPI Books",
+      "url": "https://www.mdpi.com/books",
+      "categoria": "Acadêmicos e científicos",
+      "formatos": "PDF",
+      "cadastro": "Não para obras abertas",
+      "download_direto": "Variável",
+      "situacao_direitos": "Acesso misto"
+    },
+    {
+      "nome": "National Academies Press",
+      "url": "https://www.nap.edu/",
+      "categoria": "Acadêmicos e científicos",
+      "formatos": "PDF",
+      "cadastro": "Variável",
+      "download_direto": "Títulos elegíveis",
+      "situacao_direitos": "Publicação autorizada"
+    },
+    {
+      "nome": "World Bank Research",
+      "url": "https://www.worldbank.org/en/research",
+      "categoria": "Acadêmicos e científicos",
+      "formatos": "PDF",
+      "cadastro": "Não para obras abertas",
+      "download_direto": "Conforme obra",
+      "situacao_direitos": "Institucional"
+    },
+    {
+      "nome": "UNESDOC",
+      "url": "https://unesdoc.unesco.org/",
+      "categoria": "Acadêmicos e científicos",
+      "formatos": "PDF",
+      "cadastro": "Não",
+      "download_direto": "Sim",
+      "situacao_direitos": "Institucional"
+    },
+    {
+      "nome": "Zenodo",
+      "url": "https://zenodo.org/",
+      "categoria": "Acadêmicos e científicos",
+      "formatos": "PDF, outros",
+      "cadastro": "Não para downloads públicos",
+      "download_direto": "Sim",
+      "situacao_direitos": "Licença por publicação"
+    },
+    {
+      "nome": "arXiv",
+      "url": "https://arxiv.org/",
+      "categoria": "Acadêmicos e científicos",
+      "formatos": "PDF",
+      "cadastro": "Não",
+      "download_direto": "Sim",
+      "situacao_direitos": "Repositório de autores"
+    },
+    {
+      "nome": "HAL",
+      "url": "https://hal.science/",
+      "categoria": "Acadêmicos e científicos",
+      "formatos": "PDF",
+      "cadastro": "Não",
+      "download_direto": "Quando depositado",
+      "situacao_direitos": "Repositório acadêmico"
+    },
+    {
+      "nome": "freeCodeCamp",
+      "url": "https://www.freecodecamp.org/news/",
+      "categoria": "Tecnologia e negócios",
+      "formatos": "Web, PDF selecionado",
+      "cadastro": "Não",
+      "download_direto": "Alguns materiais",
+      "situacao_direitos": "Projeto/autores"
+    },
+    {
+      "nome": "Free Programming Books",
+      "url": "https://github.com/EbookFoundation/free-programming-books",
+      "categoria": "Tecnologia e negócios",
+      "formatos": "Variável",
+      "cadastro": "Não",
+      "download_direto": "Links externos",
+      "situacao_direitos": "Curadoria comunitária"
+    },
+    {
+      "nome": "O'Reilly",
+      "url": "https://www.oreilly.com/",
+      "categoria": "Tecnologia e negócios",
+      "formatos": "Variável",
+      "cadastro": "Geralmente sim",
+      "download_direto": "Amostras/ofertas",
+      "situacao_direitos": "Editora"
+    },
+    {
+      "nome": "Leanpub",
+      "url": "https://leanpub.com/",
+      "categoria": "Tecnologia e negócios",
+      "formatos": "PDF, EPUB",
+      "cadastro": "Variável",
+      "download_direto": "Títulos grátis",
+      "situacao_direitos": "Autores e editoras"
+    },
+    {
+      "nome": "Manning",
+      "url": "https://www.manning.com/",
+      "categoria": "Tecnologia e negócios",
+      "formatos": "PDF, EPUB",
+      "cadastro": "Variável",
+      "download_direto": "Amostras/ofertas",
+      "situacao_direitos": "Editora"
+    },
+    {
+      "nome": "Packt",
+      "url": "https://www.packtpub.com/",
+      "categoria": "Tecnologia e negócios",
+      "formatos": "PDF, EPUB",
+      "cadastro": "Variável",
+      "download_direto": "Promoções",
+      "situacao_direitos": "Editora"
+    },
+    {
+      "nome": "LibreTexts",
+      "url": "https://www.libretexts.org/",
+      "categoria": "Tecnologia e negócios",
+      "formatos": "Web, PDF",
+      "cadastro": "Não para leitura",
+      "download_direto": "Conforme livro",
+      "situacao_direitos": "Conteúdo aberto"
+    },
+    {
+      "nome": "Bookboon",
+      "url": "https://www.bookboon.com/",
+      "categoria": "Tecnologia e negócios",
+      "formatos": "PDF",
+      "cadastro": "Sim/variável",
+      "download_direto": "Conforme oferta",
+      "situacao_direitos": "Licenciado"
+    },
+    {
+      "nome": "HubSpot Resources",
+      "url": "https://www.hubspot.com/resources",
+      "categoria": "Tecnologia e negócios",
+      "formatos": "PDF",
+      "cadastro": "Frequentemente solicita dados",
+      "download_direto": "Materiais selecionados",
+      "situacao_direitos": "Publicação da empresa"
+    },
+    {
+      "nome": "Nielsen Norman Group",
+      "url": "https://www.nngroup.com/reports/",
+      "categoria": "Tecnologia e negócios",
+      "formatos": "PDF",
+      "cadastro": "Variável",
+      "download_direto": "Relatórios selecionados",
+      "situacao_direitos": "Publicação da empresa"
+    },
+    {
+      "nome": "InfoBooks",
+      "url": "https://www.infobooks.org/",
+      "categoria": "Tecnologia e negócios",
+      "formatos": "PDF",
+      "cadastro": "Não",
+      "download_direto": "Sim",
+      "situacao_direitos": "Licenças declaradas"
+    },
+    {
+      "nome": "Gallica",
+      "url": "https://gallica.bnf.fr/",
+      "categoria": "Arquivos culturais",
+      "formatos": "PDF, outros",
+      "cadastro": "Não",
+      "download_direto": "Sim",
+      "situacao_direitos": "Institucional"
+    },
+    {
+      "nome": "Europeana",
+      "url": "https://www.europeana.eu/",
+      "categoria": "Arquivos culturais",
+      "formatos": "Variável",
+      "cadastro": "Não",
+      "download_direto": "Via instituição",
+      "situacao_direitos": "Direitos variáveis"
+    },
+    {
+      "nome": "Library of Congress",
+      "url": "https://www.loc.gov/collections/",
+      "categoria": "Arquivos culturais",
+      "formatos": "PDF, imagens",
+      "cadastro": "Não",
+      "download_direto": "Conforme obra",
+      "situacao_direitos": "Institucional"
+    },
+    {
+      "nome": "HathiTrust",
+      "url": "https://www.hathitrust.org/",
+      "categoria": "Arquivos culturais",
+      "formatos": "PDF, web",
+      "cadastro": "Variável",
+      "download_direto": "Conforme direitos",
+      "situacao_direitos": "Institucional"
+    },
+    {
+      "nome": "HathiTrust Digital Library",
+      "url": "https://babel.hathitrust.org/",
+      "categoria": "Arquivos culturais",
+      "formatos": "PDF, web",
+      "cadastro": "Variável",
+      "download_direto": "Conforme direitos",
+      "situacao_direitos": "Institucional"
+    },
+    {
+      "nome": "Biblioteca Cervantes",
+      "url": "https://www.cervantesvirtual.com/",
+      "categoria": "Arquivos culturais",
+      "formatos": "Web, PDF variável",
+      "cadastro": "Não",
+      "download_direto": "Variável",
+      "situacao_direitos": "Institucional"
+    },
+    {
+      "nome": "Biblioteca Nacional de España",
+      "url": "https://www.bne.es/",
+      "categoria": "Arquivos culturais",
+      "formatos": "PDF, outros",
+      "cadastro": "Não",
+      "download_direto": "Variável",
+      "situacao_direitos": "Institucional"
+    },
+    {
+      "nome": "Gutenberg Australia",
+      "url": "https://www.gutenberg.org.au/",
+      "categoria": "Arquivos culturais",
+      "formatos": "HTML, TXT, outros",
+      "cadastro": "Não",
+      "download_direto": "Sim",
+      "situacao_direitos": "Direitos conforme jurisdição"
+    },
+    {
+      "nome": "Aozora Bunko",
+      "url": "https://www.aozora.gr.jp/",
+      "categoria": "Arquivos culturais",
+      "formatos": "TXT, HTML",
+      "cadastro": "Não",
+      "download_direto": "Sim",
+      "situacao_direitos": "Domínio público/licenças"
+    },
+    {
+      "nome": "Biodiversity Heritage Library",
+      "url": "https://www.biodiversitylibrary.org/",
+      "categoria": "Arquivos culturais",
+      "formatos": "PDF, outros",
+      "cadastro": "Não",
+      "download_direto": "Sim",
+      "situacao_direitos": "Direitos por obra"
+    },
+    {
+      "nome": "NYPL Digital Collections",
+      "url": "https://digitalcollections.nypl.org/",
+      "categoria": "Arquivos culturais",
+      "formatos": "Variável",
+      "cadastro": "Não",
+      "download_direto": "Conforme obra",
+      "situacao_direitos": "Institucional"
+    },
+    {
+      "nome": "World Digital Library",
+      "url": "https://www.wdl.org/",
+      "categoria": "Arquivos culturais",
+      "formatos": "Variável",
+      "cadastro": "Não",
+      "download_direto": "Conforme plataforma",
+      "situacao_direitos": "Acervo histórico"
+    },
+    {
+      "nome": "BDeBooks",
+      "url": "https://bdebooks.com/pt/",
+      "categoria": "Agregadores e buscadores",
+      "formatos": "EPUB, PDF",
+      "cadastro": "Não segundo site",
+      "download_direto": "Anunciado",
+      "situacao_direitos": "Não verificado"
+    },
+    {
+      "nome": "GetFreeEbooks",
+      "url": "https://www.getfreeebooks.com/",
+      "categoria": "Agregadores e buscadores",
+      "formatos": "Variável",
+      "cadastro": "Conforme destino",
+      "download_direto": "Links externos",
+      "situacao_direitos": "Depende da fonte"
+    },
+    {
+      "nome": "Obooko",
+      "url": "https://www.obooko.com/",
+      "categoria": "Agregadores e buscadores",
+      "formatos": "EPUB, PDF",
+      "cadastro": "Variável",
+      "download_direto": "Conforme título",
+      "situacao_direitos": "Autorização declarada"
+    },
+    {
+      "nome": "Bookyards",
+      "url": "https://www.bookyards.com/",
+      "categoria": "Agregadores e buscadores",
+      "formatos": "Variável",
+      "cadastro": "Não confirmado",
+      "download_direto": "A verificar",
+      "situacao_direitos": "Não verificado"
+    },
+    {
+      "nome": "PDF Drive",
+      "url": "https://www.pdfdrive.com/",
+      "categoria": "Agregadores e buscadores",
+      "formatos": "PDF",
+      "cadastro": "Não confirmado",
+      "download_direto": "A verificar",
+      "situacao_direitos": "Não verificado"
+    },
+    {
+      "nome": "Google Books",
+      "url": "https://books.google.com/",
+      "categoria": "Agregadores e buscadores",
+      "formatos": "PDF, EPUB selecionado",
+      "cadastro": "Não para pesquisar",
+      "download_direto": "Obras elegíveis",
+      "situacao_direitos": "Autorizado conforme título"
+    },
+    {
+      "nome": "OpenShelf",
+      "url": "https://openshelf.site/",
+      "categoria": "Agregadores e buscadores",
+      "formatos": "Via fonte",
+      "cadastro": "Não confirmado",
+      "download_direto": "Via fonte original",
+      "situacao_direitos": "Depende da fonte"
+    }
+  ]
+}
