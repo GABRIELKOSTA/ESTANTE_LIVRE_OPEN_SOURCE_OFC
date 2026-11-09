@@ -1,0 +1,6 @@
+{
+  "appId": "com.estantelivre.app",
+  "appName": "Estante Livre",
+  "webDir": "dist",
+  "android": { "backgroundColor": "#07080d" }
+}
