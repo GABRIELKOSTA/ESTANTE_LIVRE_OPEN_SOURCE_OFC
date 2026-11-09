@@ -5,3 +5,4 @@ android/.gradle
 android/build
 .gradle-user-home
 .android-user-home
+.android-user-home-v2
